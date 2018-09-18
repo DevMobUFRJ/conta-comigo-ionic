@@ -1,0 +1,7 @@
+{
+  "name": "conta-comigo",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular"
+}
