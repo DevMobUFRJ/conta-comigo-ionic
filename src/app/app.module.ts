@@ -9,6 +9,8 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { PessoasPage } from '../pages/pessoas/pessoas';
 import { ProdutosPage } from '../pages/produtos/produtos';
+import { PessoaModalPage } from '../pages/pessoa-modal/pessoa-modal';
+import { ProdutoModalPage } from '../pages/produto-modal/produto-modal';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { ProdutosPage } from '../pages/produtos/produtos';
     HomePage,
     TabsPage,
     PessoasPage,
-    ProdutosPage
+    ProdutosPage,
+    PessoaModalPage,
+    ProdutoModalPage
   ],
   imports: [
     BrowserModule,
@@ -28,7 +32,9 @@ import { ProdutosPage } from '../pages/produtos/produtos';
     HomePage,
     TabsPage,
     PessoasPage,
-    ProdutosPage
+    ProdutosPage,    
+    PessoaModalPage,
+    ProdutoModalPage
   ],
   providers: [
     StatusBar,

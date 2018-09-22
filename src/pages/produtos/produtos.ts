@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the ProdutosPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { Conta } from '../../models/conta';
+import { ProdutoModalPage } from '../produto-modal/produto-modal';
 
 @IonicPage()
 @Component({
@@ -15,11 +10,28 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ProdutosPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public conta: Conta;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
+    this.conta = this.navParams.data;
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ProdutosPage');
+  }
+
+  ionViewDidEnter() {
+    console.log('ionViewDidEnter ProdutosPage');
+  }
+
+  public openProdutoModal() {
+    let modal = this.modalCtrl.create(ProdutoModalPage);
+    modal.onDidDismiss(produto => {
+      if(produto != null) {
+        // atualiza lista de produtos
+      }
+    });
+    modal.present();
   }
 
 }
