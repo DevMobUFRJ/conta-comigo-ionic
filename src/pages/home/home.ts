@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, AlertController, Alert } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 
 @Component({
@@ -23,19 +23,19 @@ export class HomePage {
       ],
       buttons: [
         {
-          text: 'Cancel',
+          text: 'Cancelar',
           role: 'cancel',
           handler: data => {
             console.log('Cancel clicked');
-            console.log(data);
           }
         },
         {
-          text: 'Login',
+          text: 'Criar',
           handler: data => {
             console.log(data);
             this.navCtrl.push(TabsPage, {
-              newBill: true
+              nomeNovaConta: data.username,
+              isNovaConta: true
             });
           }
         }
@@ -47,7 +47,7 @@ export class HomePage {
 
   public savedBill(): void {
     this.navCtrl.push(TabsPage, {
-      newBill: false
+      isNovaConta: false
     });
   }
 
