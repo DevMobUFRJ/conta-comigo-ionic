@@ -9,7 +9,7 @@ import { Conta } from '../../models/conta';
 })
 export class PessoasPage {
 
-  public conta: Conta = <Conta>{};
+  public conta: Conta;
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
     this.conta = this.navParams.data;
