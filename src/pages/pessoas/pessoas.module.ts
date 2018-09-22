@@ -6,6 +6,9 @@ import { PessoasPage } from './pessoas';
   declarations: [
     PessoasPage,
   ],
+  exports: [
+    PessoasPage
+  ],
   imports: [
     IonicPageModule.forChild(PessoasPage),
   ],

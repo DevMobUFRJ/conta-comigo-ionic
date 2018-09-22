@@ -32,7 +32,6 @@ export class HomePage {
         {
           text: 'Criar',
           handler: data => {
-            console.log(data);
             this.navCtrl.push(TabsPage, {
               nomeNovaConta: data.username,
               isNovaConta: true
