@@ -11,6 +11,7 @@ import { PessoasPage } from '../pages/pessoas/pessoas';
 import { ProdutosPage } from '../pages/produtos/produtos';
 import { PessoaModalPage } from '../pages/pessoa-modal/pessoa-modal';
 import { ProdutoModalPage } from '../pages/produto-modal/produto-modal';
+import { ContaService } from '../services/conta/conta-service';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { ProdutoModalPage } from '../pages/produto-modal/produto-modal';
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ContaService
   ]
 })
 export class AppModule {}
