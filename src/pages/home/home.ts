@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, AlertController } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
 
 @Component({
@@ -8,19 +8,45 @@ import { TabsPage } from '../tabs/tabs';
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, private alertCtrl: AlertController) {
 
   }
 
   public newBill(): void {
-    this.navCtrl.push(TabsPage, {
-      newBill: true
+    let alert = this.alertCtrl.create({
+      title: 'Nova Conta',
+      inputs: [
+        {
+          name: 'name',
+          placeholder: 'Nome'
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'Criar',
+          handler: data => {
+            this.navCtrl.push(TabsPage, {
+              nomeNovaConta: data.name,
+              isNovaConta: true
+            });
+          }
+        }
+      ]
     });
+
+    alert.present();
   }
 
   public savedBill(): void {
     this.navCtrl.push(TabsPage, {
-      newBill: false
+      isNovaConta: false
     });
   }
 

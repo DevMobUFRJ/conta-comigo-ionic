@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title>{{conta.nome}}</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+
+  <ion-list>
+    <ion-item *ngFor="let aux of pessoasProdutos">
+        {{aux.pessoa.nome}}
+        <ion-list>
+          <ion-item *ngFor="let produtosConsumidos of aux.produtosConsumidos">
+            {{produtosConsumidos.produto.nome}}
+            x {{produtosConsumidos.quantidade}}
+          </ion-item>
+        </ion-list>
+    </ion-item>
+  </ion-list>
+
+  <!-- BOTÃO ADICIONAR -->
+  <ion-fab right bottom>
+    <button ion-fab (click)="openPessoaModal()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+
+</ion-content>
