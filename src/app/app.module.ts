@@ -13,6 +13,8 @@ import { PessoaModalPage } from '../pages/pessoa-modal/pessoa-modal';
 import { ProdutoModalPage } from '../pages/produto-modal/produto-modal';
 import { ContaService } from '../services/conta/conta-service';
 
+import { IonicStorageModule } from '@ionic/storage';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -25,7 +27,8 @@ import { ContaService } from '../services/conta/conta-service';
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [

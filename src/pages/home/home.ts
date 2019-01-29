@@ -17,7 +17,7 @@ export class HomePage {
       title: 'Nova Conta',
       inputs: [
         {
-          name: 'username',
+          name: 'name',
           placeholder: 'Nome'
         },
       ],
@@ -33,7 +33,7 @@ export class HomePage {
           text: 'Criar',
           handler: data => {
             this.navCtrl.push(TabsPage, {
-              nomeNovaConta: data.username,
+              nomeNovaConta: data.name,
               isNovaConta: true
             });
           }
