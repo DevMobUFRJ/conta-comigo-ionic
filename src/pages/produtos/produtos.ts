@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, Events } from 'ionic-angular';
 import { Conta } from '../../models/conta';
 import { ProdutoModalPage } from '../produto-modal/produto-modal';
 
@@ -12,8 +12,14 @@ export class ProdutosPage {
 
   public conta: Conta;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController) {
+  constructor(
+    public navCtrl: NavController, 
+    public navParams: NavParams, 
+    public modalCtrl: ModalController,
+    private _events: Events) 
+  {
     this.conta = this.navParams.data;
+    this._events.subscribe('update-conta', (conta) => this.conta = conta);
   }
 
   ionViewDidLoad() {

@@ -15,4 +15,19 @@
 
 <ion-content padding>
 
+  <ion-list padding-right="">
+
+    <ion-item margin-top>
+      <ion-input no-margin placeholder="Nome" [(ngModel)]="pessoa.nome"></ion-input>
+    </ion-item>
+
+  </ion-list>
+
+  <!-- BOTÃO ADICIONAR -->
+  <ion-fab right bottom>
+    <button ion-fab (click)="add()">
+      <ion-icon name="add"></ion-icon>
+    </button>
+  </ion-fab>
+
 </ion-content>
