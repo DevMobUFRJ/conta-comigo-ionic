@@ -2,9 +2,7 @@ import { Injectable } from '@angular/core';
 import { Conta } from '../models/conta';
 import { PessoaProduto } from '../models/pessoa-produto';
 import { Storage } from '@ionic/storage';
-import { Consumidor } from '../models/consumidor';
-import { Pessoa } from '../models/pessoa';
-import { Produto } from '../models/produto';
+import { ProdutoPessoa } from '../models/produto-pessoa';
 
 
 @Injectable()
@@ -40,7 +38,19 @@ export class ContaService {
     conta.pessoas.forEach(p => {
       lista.push(<PessoaProduto>{
         pessoa: p,
-        produtosConsumidos: conta.consumidores.filter(c => c.pessoa.id == p.id)
+        produtosConsumidos: conta.consumidores.filter(c => c.pessoa.nome == p.nome)
+      });
+    });
+
+    return lista;
+  }
+
+  public criaListaProdutoComPessoas(conta: Conta): Array<ProdutoPessoa> {
+    let lista: Array<ProdutoPessoa> = [];
+    conta.produtos.forEach(p => {
+      lista.push(<ProdutoPessoa>{
+        produto: p,
+        consumidores: conta.consumidores.filter(c => c.produto.nome == p.nome)
       });
     });
 
