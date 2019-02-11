@@ -15,6 +15,10 @@
       <ion-input no-margin placeholder="Nome" [(ngModel)]="produto.nome"></ion-input>
     </ion-item>
 
+    <ion-item margin-top>
+      <ion-input no-margin placeholder="Preço" [(ngModel)]="produto.preco" [brmasker]="{money: true}"></ion-input>
+    </ion-item>
+
   </ion-list>
 
   <ion-footer no-shadow>
