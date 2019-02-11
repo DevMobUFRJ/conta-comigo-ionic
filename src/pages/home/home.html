@@ -5,20 +5,19 @@
   <ion-grid>
     <ion-row>
       <ion-col col-12 text-center>
-        <img src="assets/imgs/ContaComigo_Title.png" style="width: 65%;"/>
-        <img src="assets/imgs/ContaComigo_Logo.png" style="width: 65%;"/>
+        <img src="assets/imgs/ContaComigo_Title.png" style="width: 65%;" />
+        <img src="assets/imgs/ContaComigo_Logo.png" style="width: 65%;" />
       </ion-col>
       <ion-col col-12>
-        <button ion-button round outline block (click)="newBill()" color="cc-primary" style="margin-top: 6px;">
+        <button ion-button round outline block (click)="novaConta()" color="cc-primary" style="margin-top: 6px;">
           <strong padding>
-            <ion-icon name="bookmark" class="material-icons" style="padding-right: 6px;"></ion-icon>
             Nova Conta
           </strong>
         </button>
-        <button ion-button round block (click)="savedBill()" color="cc-primary">
+        <button *ngIf="existeContaAntiga()" ion-button round block (click)="contaAntiga()" color="cc-primary">
           <strong padding>
             <ion-icon name="bookmark" class="material-icons" style="padding-right: 6px;"></ion-icon>
-            Continuar ~Nome_Ultima_Conta~
+            {{conta.nome}}
           </strong>
         </button>
       </ion-col>

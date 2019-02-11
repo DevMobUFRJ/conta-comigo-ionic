@@ -2,9 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, Events } from 'ionic-angular';
 import { Conta } from '../../models/conta';
 import { PessoaModalPage } from '../pessoa-modal/pessoa-modal';
-import { Consumidor } from '../../models/consumidor';
-import { Pessoa } from '../../models/pessoa';
-import { Produto } from '../../models/produto';
 import { ContaService } from '../../services/conta/conta-service';
 import { PessoaProduto } from '../../models/pessoa-produto';
 

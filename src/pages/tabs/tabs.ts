@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, LoadingController, Events } from 'ionic-angular';
+import { NavParams } from 'ionic-angular';
 import { Conta } from '../../models/conta';
 import { ProdutosPage } from '../produtos/produtos';
 import { PessoasPage } from '../pessoas/pessoas';
@@ -15,22 +15,13 @@ export class TabsPage {
 
   private conta: Conta = <Conta>{};
 
-  constructor(public navParams: NavParams, 
-              private contaService: ContaService, 
-              private _loadingCtrl: LoadingController,
-              private _events: Events) 
-  {
-    if(this.navParams.get('isNovaConta')) {
+  constructor(public navParams: NavParams,
+    private contaService: ContaService) {
+    if (this.navParams.get('isNovaConta')) {
       this.conta = this.contaService.criaConta(this.navParams.get('nomeNovaConta'));
     }
     else {
-      let loadingConta = this._loadingCtrl.create({content: 'Carregando conta...'});
-      loadingConta.present();
-      this.contaService.getConta().then(c => {
-        this.conta = c
-        this._events.publish('update-conta', this.conta);
-        loadingConta.dismiss();
-      });
+      this.conta = this.navParams.get('contaAntiga');
     }
   }
 
