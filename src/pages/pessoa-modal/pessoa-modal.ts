@@ -32,4 +32,8 @@ export class PessoaModalPage {
     this._viewCtrl.dismiss({ 'pessoa': this.pessoa });
   }
 
+  cancelaPessoa() {
+    this._viewCtrl.dismiss({ 'pessoa': null });
+  }
+
 }
