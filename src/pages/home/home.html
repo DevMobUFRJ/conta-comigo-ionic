@@ -9,12 +9,12 @@
         <img src="assets/imgs/ContaComigo_Logo.png" style="width: 65%;" />
       </ion-col>
       <ion-col col-12>
-        <button ion-button round outline block (click)="novaConta()" color="cc-primary" style="margin-top: 6px;">
+        <button ion-button round outline block (click)="novaConta()" style="margin-top: 6px;">
           <strong padding>
             Nova Conta
           </strong>
         </button>
-        <button *ngIf="existeContaAntiga()" ion-button round block (click)="contaAntiga()" color="cc-primary">
+        <button *ngIf="existeContaAntiga()" ion-button round block (click)="contaAntiga()">
           <strong padding>
             <ion-icon name="bookmark" class="material-icons" style="padding-right: 6px;"></ion-icon>
             {{conta.nome}}
