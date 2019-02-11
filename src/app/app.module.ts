@@ -15,6 +15,7 @@ import { ContaService } from '../services/conta-service';
 
 import { IonicStorageModule } from '@ionic/storage';
 import { PessoaService } from '../services/pessoa-service';
+import { ProdutoService } from '../services/produto-service';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { PessoaService } from '../services/pessoa-service';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ContaService,
-    PessoaService
+    PessoaService,
+    ProdutoService
   ]
 })
 export class AppModule {}
