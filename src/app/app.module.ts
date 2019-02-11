@@ -17,6 +17,8 @@ import { IonicStorageModule } from '@ionic/storage';
 import { PessoaService } from '../services/pessoa-service';
 import { ProdutoService } from '../services/produto-service';
 
+import { BrMaskerModule } from 'brmasker-ionic-3';
+
 @NgModule({
   declarations: [
     MyApp,
@@ -30,7 +32,8 @@ import { ProdutoService } from '../services/produto-service';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    BrMaskerModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
