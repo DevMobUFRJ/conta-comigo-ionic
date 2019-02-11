@@ -56,8 +56,6 @@ export class ProdutoModalPage {
     const qntdIndividual = this.quantidadeConsumida / cont;
     this.conta.consumidores.forEach(c => c.quantidade = qntdIndividual);
     this._produtoService.add(this.produto, this.conta);
-    console.log(this._contaService.criaListaPessoaComProdutos(this.conta));
-    console.log(this._contaService.criaListaProdutoComPessoas(this.conta));
     this.dismiss();
   }
 
@@ -67,6 +65,10 @@ export class ProdutoModalPage {
 
   dismiss() {
     this._viewCtrl.dismiss({ 'produto': this.produto });
+  }
+
+  cancelaProduto() {
+    this._viewCtrl.dismiss({ 'produto': null });
   }
 
 }
