@@ -23,11 +23,9 @@ export class ProdutosPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProdutosPage');
   }
 
   ionViewDidEnter() {
-    console.log('ionViewDidEnter ProdutosPage');
   }
 
   public openProdutoModal() {

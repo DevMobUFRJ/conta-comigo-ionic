@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, Events } from 'ionic-angular';
 import { Conta } from '../../models/conta';
 import { PessoaModalPage } from '../pessoa-modal/pessoa-modal';
-import { ContaService } from '../../services/conta/conta-service';
+import { ContaService } from '../../services/conta-service';
 import { PessoaProduto } from '../../models/pessoa-produto';
 
 @IonicPage()
@@ -26,11 +26,9 @@ export class PessoasPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad PessoasPage');
   }
 
   ionViewDidEnter() {
-    console.log('ionViewDidEnter PessoasPage')
   }
 
   public openPessoaModal() {
