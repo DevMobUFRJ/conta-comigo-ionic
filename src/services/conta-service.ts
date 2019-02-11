@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Conta } from '../../models/conta';
-import { PessoaProduto } from '../../models/pessoa-produto';
-import { Storage } from '../../../node_modules/@ionic/storage';
-import { Consumidor } from '../../models/consumidor';
-import { Pessoa } from '../../models/pessoa';
-import { Produto } from '../../models/produto';
+import { Conta } from '../models/conta';
+import { PessoaProduto } from '../models/pessoa-produto';
+import { Storage } from '@ionic/storage';
+import { Consumidor } from '../models/consumidor';
+import { Pessoa } from '../models/pessoa';
+import { Produto } from '../models/produto';
 
 
 @Injectable()
@@ -14,16 +14,20 @@ export class ContaService {
   }
 
   public criaConta(nome: string): Conta {
-    let conta: Conta = <Conta>{ 
+    let conta: Conta = <Conta>{
       id: 1,
       nome: nome,
-      consumidores: <Array<Consumidor>>{},
-      pessoas: <Array<Pessoa>>{},
-      produtos: <Array<Produto>>{},
+      consumidores: [],
+      pessoas: [],
+      produtos: [],
       total: 0
     };
     this.storage.remove('conta').then(p => this.storage.set('conta', conta));
     return conta;
+  }
+
+  public updateConta(conta: Conta): void {
+    this.storage.set('conta', conta);
   }
 
   public getConta(): Promise<Conta> {

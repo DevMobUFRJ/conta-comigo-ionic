@@ -3,7 +3,7 @@ import { NavParams } from 'ionic-angular';
 import { Conta } from '../../models/conta';
 import { ProdutosPage } from '../produtos/produtos';
 import { PessoasPage } from '../pessoas/pessoas';
-import { ContaService } from '../../services/conta/conta-service';
+import { ContaService } from '../../services/conta-service';
 
 @Component({
   templateUrl: 'tabs.html'

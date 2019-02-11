@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController, LoadingController, Events } from 'ionic-angular';
 import { TabsPage } from '../tabs/tabs';
-import { ContaService } from '../../services/conta/conta-service';
+import { ContaService } from '../../services/conta-service';
 import { Conta } from '../../models/conta';
 
 @Component({
@@ -43,7 +43,7 @@ export class HomePage {
           text: 'Cancelar',
           role: 'cancel',
           handler: data => {
-            console.log('Cancel clicked');
+            // console.log('Cancel clicked');
           }
         },
         {

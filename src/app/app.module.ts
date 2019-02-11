@@ -11,9 +11,10 @@ import { PessoasPage } from '../pages/pessoas/pessoas';
 import { ProdutosPage } from '../pages/produtos/produtos';
 import { PessoaModalPage } from '../pages/pessoa-modal/pessoa-modal';
 import { ProdutoModalPage } from '../pages/produto-modal/produto-modal';
-import { ContaService } from '../services/conta/conta-service';
+import { ContaService } from '../services/conta-service';
 
 import { IonicStorageModule } from '@ionic/storage';
+import { PessoaService } from '../services/pessoa-service';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { IonicStorageModule } from '@ionic/storage';
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ContaService
+    ContaService,
+    PessoaService
   ]
 })
 export class AppModule {}

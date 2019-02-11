@@ -19,7 +19,6 @@ export class ProdutoModalPage {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad ProdutoModalPage');
   }
 
 }
