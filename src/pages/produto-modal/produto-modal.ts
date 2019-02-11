@@ -1,12 +1,7 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
-/**
- * Generated class for the ProdutoModalPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { Produto } from '../../models/produto';
+import { ProdutoService } from '../../services/produto-service';
 
 @IonicPage()
 @Component({
@@ -15,10 +10,24 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ProdutoModalPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public produto: Produto = <Produto>{};
+
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    private _produtoService: ProdutoService,
+    public _viewCtrl: ViewController) {
   }
 
   ionViewDidLoad() {
+  }
+
+  public add(): void {
+    this._produtoService.add(this.produto);
+    this.dismiss();
+  }
+
+  dismiss() {
+    this._viewCtrl.dismiss({ 'produto': this.produto });
   }
 
 }
