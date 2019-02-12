@@ -16,13 +16,12 @@ export class ProdutosPage {
   public produtosPessoas: Array<ProdutoPessoa>
 
   constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams, 
+    public navCtrl: NavController,
+    public navParams: NavParams,
     public modalCtrl: ModalController,
     private _contaService: ContaService,
-    public _events: Events) 
-  {
-    this.conta = this.navParams.data;    
+    public _events: Events) {
+    this.conta = this.navParams.data;
     this._events.subscribe('update-conta', (conta) => {
       this.conta = conta
       this.initExpandableList();
@@ -43,7 +42,7 @@ export class ProdutosPage {
       element.itemExpandHeight = element.consumidores.length * 20;
       element.total = 0 as number;
       element.consumidores.forEach(consumidor => {
-        element.total = element.total + Number(consumidor.produto.preco.replace(/\./g, '').replace(',', '.'));
+        element.total = element.total + Number(consumidor.produto.preco.replace(/\./g, '').replace(',', '.')) * consumidor.quantidade;
       });
     });
   }
@@ -56,7 +55,7 @@ export class ProdutosPage {
   public openProdutoModal() {
     let modal = this.modalCtrl.create(ProdutoModalPage);
     modal.onDidDismiss(produto => {
-      if(produto != null) {
+      if (produto != null) {
         // atualiza lista de produtos
       }
     });

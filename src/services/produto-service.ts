@@ -16,9 +16,9 @@ export class ProdutoService {
   }
 
   public add(produto: Produto, conta: Conta, quantidadeConsumida: number, pessoasSelecionadas: boolean[]): void {
-    this.insereConsumidoresNaConta(conta, produto, quantidadeConsumida, pessoasSelecionadas);
     const load = this._loadingCtrl.create({ content: 'Salvando produto...' });
     load.present();
+    this.insereConsumidoresNaConta(conta, produto, quantidadeConsumida, pessoasSelecionadas);
     this.storage.get('produtos').then(ps => {
       this.addApenasProduto(ps, produto);
       conta.produtos.push(produto);

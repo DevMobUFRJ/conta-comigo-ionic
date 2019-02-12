@@ -12,14 +12,11 @@ export class ExpandableComponent {
     currentHeight: number = 0;
 
     constructor() {
-        console.log('Hello ExpandableComponent Component');
     }
 
-    ngAfterViewInit(){
-        console.log(this.expanded);
-        console.log(this.expandedHeight);
-
-        
+    ngAfterViewInit() {
+        // console.log(this.expanded);
+        // console.log(this.expandedHeight);
     }
 
 }
