@@ -1,5 +1,9 @@
 expandable {
 
+    :root {
+        --height: 200px;
+      }
+
     .expand-wrapper{
         height: 0;
         transition: 0.1s linear;
@@ -7,6 +11,6 @@ expandable {
     
 
     .expanded {
-        height: 200px !important;
+        height: var(--height) !important;
     }
 }
