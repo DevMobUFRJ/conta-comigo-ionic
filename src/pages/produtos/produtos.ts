@@ -20,16 +20,23 @@ export class ProdutosPage {
     public navParams: NavParams, 
     public modalCtrl: ModalController,
     private _contaService: ContaService,
-    private _events: Events) 
+    public _events: Events) 
   {
-    this.conta = this.navParams.data;
-    this._events.subscribe('update-conta', (conta) => this.conta = conta);
+    this.conta = this.navParams.data;    
+    this._events.subscribe('update-conta', (conta) => {
+      this.conta = conta
+      this.initExpandableList();
+    });
   }
 
   ionViewDidLoad() {
   }
 
   ionViewDidEnter() {
+    this.initExpandableList();
+  }
+
+  private initExpandableList() {
     this.produtosPessoas = this._contaService.criaListaProdutoComPessoas(this.conta);
     this.produtosPessoas.forEach(element => {
       element.expanded = false;
