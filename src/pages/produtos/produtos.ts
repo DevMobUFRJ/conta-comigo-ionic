@@ -29,10 +29,10 @@ export class ProdutosPage {
   }
 
   ionViewDidLoad() {
+    this.initExpandableList();
   }
 
   ionViewDidEnter() {
-    this.initExpandableList();
   }
 
   private initExpandableList() {
@@ -46,7 +46,7 @@ export class ProdutosPage {
     });
   }
 
-  public expandItem(item){
+  public expandItem(item) {
     item.expanded = !item.expanded;
   }
 
