@@ -18,6 +18,7 @@ import { PessoaService } from '../services/pessoa-service';
 import { ProdutoService } from '../services/produto-service';
 
 import { BrMaskerModule } from 'brmasker-ionic-3';
+import { ExpandableComponent } from '../components/expandable/expandable';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { BrMaskerModule } from 'brmasker-ionic-3';
     PessoasPage,
     ProdutosPage,
     PessoaModalPage,
-    ProdutoModalPage
+    ProdutoModalPage,
+    ExpandableComponent
   ],
   imports: [
     BrowserModule,

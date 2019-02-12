@@ -10,7 +10,7 @@
 <ion-content padding>
 
 
-  <ion-list>
+  <!-- <ion-list>
     <ion-item *ngFor="let aux of pessoasProdutos">
         {{aux.pessoa.nome}}
         <ion-list>
@@ -20,6 +20,19 @@
           </ion-item>
         </ion-list>
     </ion-item>
+  </ion-list> -->
+
+  <ion-list>
+    <button (click)="expandItem(pessoaProduto)" ion-item *ngFor="let pessoaProduto of pessoasProdutos">
+      {{pessoaProduto.pessoa.nome}}
+      <expandable [expandHeight]="itemExpandHeight" [expanded]="pessoaProduto.expanded">
+        <p *ngFor="let produtosConsumidos of pessoaProduto.produtosConsumidos">
+        {{produtosConsumidos.quantidade}}x{{produtosConsumidos.produto.nome}}
+        {{produtosConsumidos.produto.preco}}
+        </p>
+      </expandable>
+      <button ion-button clear item-end>View</button>
+    </button>
   </ion-list>
 
   <!-- BOTÃO ADICIONAR -->
