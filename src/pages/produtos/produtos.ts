@@ -40,7 +40,6 @@ export class ProdutosPage {
     this.produtosPessoas = this._contaService.criaListaProdutoComPessoas(this.conta);
     this.produtosPessoas.forEach(element => {
       element.expanded = false;
-      element.itemExpandHeight = element.consumidores.length * 20;
       element.total = 0 as number;
       element.consumidores.forEach(consumidor => {
         element.total = element.total + Number(consumidor.produto.preco.replace(/\./g, '').replace(',', '.'));
@@ -49,7 +48,6 @@ export class ProdutosPage {
   }
 
   public expandItem(item){
-    document.documentElement.style.setProperty('--height', item.itemExpandHeight);
     item.expanded = !item.expanded;
   }
 
