@@ -47,7 +47,6 @@ export class PessoasPage {
     let modal = this.modalCtrl.create(PessoaModalPage);
     modal.onDidDismiss(pessoa => {
       if(pessoa != null) {
-        // atualiza lista de pessoas
       }
     });
     modal.present();
