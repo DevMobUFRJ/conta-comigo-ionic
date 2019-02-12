@@ -39,14 +39,10 @@ export class PessoasPage {
     this.pessoasProdutos = this._contaService.criaListaPessoaComProdutos(this.conta);
     this.pessoasProdutos.forEach(element => {
       element.expanded = false;
-      element.itemExpandHeight = element.produtosConsumidos.length * 20;
       element.total = 0 as number;
       element.produtosConsumidos.forEach(consumidor => {
-        // console.log("Conv " + Number(consumidor.produto.preco.replace(/[^0-9\.]+/g,"")));
         element.total = element.total + Number(consumidor.produto.preco.replace(/\./g, '').replace(',', '.'));
       });
-      console.log("Here " + element.produtosConsumidos.length);
-      console.log("Here " + element.itemExpandHeight);
     });
   }
 
@@ -60,7 +56,6 @@ export class PessoasPage {
   }
 
   public expandItem(item){
-    document.documentElement.style.setProperty('--height', item.itemExpandHeight);
     item.expanded = !item.expanded;
   }
 
