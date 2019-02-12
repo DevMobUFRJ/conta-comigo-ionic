@@ -1,3 +1,5 @@
+import { ContaService } from './../../services/conta-service';
+import { ProdutoPessoa } from './../../models/produto-pessoa';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController, Events } from 'ionic-angular';
 import { Conta } from '../../models/conta';
@@ -11,11 +13,13 @@ import { ProdutoModalPage } from '../produto-modal/produto-modal';
 export class ProdutosPage {
 
   public conta: Conta;
+  public produtosPessoas: Array<ProdutoPessoa>
 
   constructor(
     public navCtrl: NavController, 
     public navParams: NavParams, 
     public modalCtrl: ModalController,
+    private _contaService: ContaService,
     private _events: Events) 
   {
     this.conta = this.navParams.data;
@@ -26,6 +30,20 @@ export class ProdutosPage {
   }
 
   ionViewDidEnter() {
+    this.produtosPessoas = this._contaService.criaListaProdutoComPessoas(this.conta);
+    this.produtosPessoas.forEach(element => {
+      element.expanded = false;
+      element.itemExpandHeight = element.consumidores.length * 20;
+      element.total = 0 as number;
+      element.consumidores.forEach(consumidor => {
+        element.total = element.total + Number(consumidor.produto.preco.replace(/\./g, '').replace(',', '.'));
+      });
+    });
+  }
+
+  public expandItem(item){
+    document.documentElement.style.setProperty('--height', item.itemExpandHeight);
+    item.expanded = !item.expanded;
   }
 
   public openProdutoModal() {

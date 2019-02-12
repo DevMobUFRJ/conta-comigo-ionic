@@ -1,3 +1,4 @@
+import { Consumidor } from './../models/consumidor';
 import { Injectable } from "@angular/core";
 import { ContaService } from "./conta-service";
 import { LoadingController } from "ionic-angular";
@@ -14,7 +15,8 @@ export class ProdutoService {
     private _loadingCtrl: LoadingController) {
   }
 
-  public add(produto: Produto, conta: Conta): void {
+  public add(produto: Produto, conta: Conta, quantidadeConsumida: number, pessoasSelecionadas: boolean[]): void {
+    this.insereConsumidoresNaConta(conta, produto, quantidadeConsumida, pessoasSelecionadas);
     const load = this._loadingCtrl.create({ content: 'Salvando produto...' });
     load.present();
     this.storage.get('produtos').then(ps => {
@@ -23,6 +25,22 @@ export class ProdutoService {
       this._contaService.updateConta(conta);
       load.dismiss();
     });
+  }
+
+  private insereConsumidoresNaConta(conta: Conta, produto: Produto, quantidadeConsumida: number, pessoasSelecionadas: boolean[]) {
+    let cont = 0;
+    pessoasSelecionadas.forEach((m, i) => {
+      if (m) {
+        cont++;
+        conta.consumidores.push(<Consumidor>{
+          pessoa: conta.pessoas[i],
+          produto: produto,
+          quantidade: 0
+        });
+      }
+    });
+    const qntdIndividual = quantidadeConsumida / cont;
+    conta.consumidores.forEach(c => c.quantidade = qntdIndividual);
   }
 
   private addApenasProduto(ps: Array<Produto>, produto: Produto): void {

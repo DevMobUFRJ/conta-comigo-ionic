@@ -4,7 +4,6 @@ import { Produto } from '../../models/produto';
 import { ProdutoService } from '../../services/produto-service';
 import { ContaService } from '../../services/conta-service';
 import { Conta } from '../../models/conta';
-import { Consumidor } from '../../models/consumidor';
 
 @IonicPage()
 @Component({
@@ -42,20 +41,7 @@ export class ProdutoModalPage {
   }
 
   public add(): void {
-    let cont = 0;
-    this.marcadas.forEach((m, i) => {
-      if (m) {
-        cont++;
-        this.conta.consumidores.push(<Consumidor>{
-          pessoa: this.conta.pessoas[i],
-          produto: this.produto,
-          quantidade: 0
-        });
-      }
-    });
-    const qntdIndividual = this.quantidadeConsumida / cont;
-    this.conta.consumidores.forEach(c => c.quantidade = qntdIndividual);
-    this._produtoService.add(this.produto, this.conta);
+    this._produtoService.add(this.produto, this.conta, this.quantidadeConsumida, this.marcadas);
     this.dismiss();
   }
 
