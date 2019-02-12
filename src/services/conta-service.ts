@@ -10,7 +10,7 @@ import { ProdutoPessoa } from '../models/produto-pessoa';
 export class ContaService {
 
   constructor(private storage: Storage,
-    private _events: Events) {
+    public _events: Events) {
   }
 
   public criaConta(nome: string): Conta {
