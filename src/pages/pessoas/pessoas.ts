@@ -15,12 +15,11 @@ export class PessoasPage {
   public conta: Conta;
   public pessoasProdutos: Array<PessoaProduto>
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams, 
-              public modalCtrl: ModalController, 
-              private _contaService: ContaService,
-              public _events: Events) 
-  { 
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public modalCtrl: ModalController,
+    private _contaService: ContaService,
+    public _events: Events) {
     this.conta = this.navParams.data;
     this._events.subscribe('update-conta', (conta) => {
       this.conta = conta
@@ -29,10 +28,10 @@ export class PessoasPage {
   }
 
   ionViewDidLoad() {
+    this.initExpandableList();
   }
 
   ionViewDidEnter() {
-    this.initExpandableList();
   }
 
   private initExpandableList() {
@@ -49,17 +48,17 @@ export class PessoasPage {
   public openPessoaModal() {
     let modal = this.modalCtrl.create(PessoaModalPage);
     modal.onDidDismiss(pessoa => {
-      if(pessoa != null) {
+      if (pessoa != null) {
       }
     });
     modal.present();
   }
 
-  public expandItem(item){
+  public expandItem(item) {
     item.expanded = !item.expanded;
   }
 
-  public removePessoa(pessoaProduto){
+  public removePessoa(pessoaProduto) {
     //TODO remoção do banco de pessoaProduto recebida
   }
 
