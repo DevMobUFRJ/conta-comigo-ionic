@@ -1,3 +1,4 @@
+import { Events } from 'ionic-angular';
 import { Injectable } from '@angular/core';
 import { Conta } from '../models/conta';
 import { PessoaProduto } from '../models/pessoa-produto';
@@ -8,7 +9,8 @@ import { ProdutoPessoa } from '../models/produto-pessoa';
 @Injectable()
 export class ContaService {
 
-  constructor(private storage: Storage) {
+  constructor(private storage: Storage,
+    private _events: Events) {
   }
 
   public criaConta(nome: string): Conta {
@@ -26,6 +28,7 @@ export class ContaService {
 
   public updateConta(conta: Conta): void {
     this.storage.set('conta', conta);
+    this._events.publish('update-conta', conta);
   }
 
   public getConta(): Promise<Conta> {
