@@ -28,7 +28,7 @@
       
       <expandable [expandHeight]="itemExpandHeight" [expanded]="pessoaProduto.expanded">
         <p *ngFor="let produtosConsumidos of pessoaProduto.produtosConsumidos">
-        {{produtosConsumidos.quantidade}}x{{produtosConsumidos.produto.nome}}
+        {{produtosConsumidos.quantidade}}x {{produtosConsumidos.produto.nome}}
         {{produtosConsumidos.produto.preco}}
         </p>
       </expandable>
