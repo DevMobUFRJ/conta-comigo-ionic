@@ -14,6 +14,7 @@ export class PessoasPage {
 
   public conta: Conta;
   public pessoasProdutos: Array<PessoaProduto>
+  itemExpandHeight: number = 200;
 
   constructor(public navCtrl: NavController, 
               public navParams: NavParams, 
@@ -29,6 +30,10 @@ export class PessoasPage {
   }
 
   ionViewDidEnter() {
+    this.pessoasProdutos = this._contaService.criaListaPessoaComProdutos(this.conta);
+    this.pessoasProdutos.forEach(element => {
+      element.expanded = false;
+    });
   }
 
   public openPessoaModal() {
@@ -39,6 +44,10 @@ export class PessoasPage {
       }
     });
     modal.present();
+  }
+
+  public expandItem(item){
+    item.expanded = !item.expanded;
   }
 
 }
