@@ -25,13 +25,14 @@
   <ion-list>
     <button (click)="expandItem(pessoaProduto)" ion-item *ngFor="let pessoaProduto of pessoasProdutos">
       {{pessoaProduto.pessoa.nome}}
+      
       <expandable [expandHeight]="itemExpandHeight" [expanded]="pessoaProduto.expanded">
         <p *ngFor="let produtosConsumidos of pessoaProduto.produtosConsumidos">
         {{produtosConsumidos.quantidade}}x{{produtosConsumidos.produto.nome}}
         {{produtosConsumidos.produto.preco}}
         </p>
       </expandable>
-      <button ion-button clear item-end>View</button>
+      <button ion-button clear item-end>R${{pessoaProduto.total}}</button>
     </button>
   </ion-list>
 
