@@ -59,4 +59,8 @@ export class PessoasPage {
     item.expanded = !item.expanded;
   }
 
+  public removePessoa(pessoaProduto){
+    //TODO remoção do banco de pessoaProduto recebida
+  }
+
 }
