@@ -35,15 +35,18 @@ export class ContaService {
     return this.storage.get('conta');
   }
 
-  // ex: para listar cada pessoa e dentro dela, cada produto consumido por ela
   public criaListaPessoaComProdutos(conta: Conta): Array<PessoaProduto> {
     let lista: Array<PessoaProduto> = [];
     conta.pessoas.forEach(p => {
       let pp = <PessoaProduto>{
         pessoa: p,
-        produtosConsumidos: conta.consumidores.filter(c => c.pessoa.nome == p.nome)
+        produtosConsumidos: conta.consumidores.filter(c => c.pessoa.nome == p.nome),
+        expanded: false,
+        total: 0
       };
-
+      if(pp.produtosConsumidos.length != 0) {
+        pp.total = pp.produtosConsumidos.map(pc => pc.produto.preco*pc.quantidade).reduce((ac, cur) => ac+cur);
+      }
       lista.push(pp);
     });
 
@@ -62,8 +65,6 @@ export class ContaService {
       pp.valorTotal = pp.produto.preco * pp.qntdTotal;
       lista.push(pp);
     });
-
-    console.log(lista)
 
     return lista;
   }

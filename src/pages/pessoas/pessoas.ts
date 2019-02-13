@@ -36,13 +36,6 @@ export class PessoasPage {
 
   private initExpandableList() {
     this.pessoasProdutos = this._contaService.criaListaPessoaComProdutos(this.conta);
-    this.pessoasProdutos.forEach(element => {
-      element.expanded = false;
-      element.total = 0 as number;
-      element.produtosConsumidos.forEach(consumidor => {
-        element.total = element.total + Number(consumidor.produto.preco.replace(/\./g, '').replace(',', '.'));
-      });
-    });
   }
 
   public openPessoaModal() {
