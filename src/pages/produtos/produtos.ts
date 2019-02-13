@@ -37,13 +37,6 @@ export class ProdutosPage {
 
   private initExpandableList() {
     this.produtosPessoas = this._contaService.criaListaProdutoComPessoas(this.conta);
-    this.produtosPessoas.forEach(element => {
-      element.expanded = false;
-      element.total = 0 as number;
-      element.consumidores.forEach(consumidor => {
-        element.total = element.total + Number(consumidor.produto.preco.replace(/\./g, '').replace(',', '.')) * consumidor.quantidade;
-      });
-    });
   }
 
   public expandItem(item) {

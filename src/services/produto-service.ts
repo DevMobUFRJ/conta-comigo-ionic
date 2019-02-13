@@ -5,6 +5,7 @@ import { LoadingController } from "ionic-angular";
 import { Storage } from '@ionic/storage';
 import { Produto } from "../models/produto";
 import { Conta } from "../models/conta";
+import { Pessoa } from '../models/pessoa';
 
 
 @Injectable()
@@ -28,19 +29,18 @@ export class ProdutoService {
   }
 
   private insereConsumidoresNaConta(conta: Conta, produto: Produto, quantidadeConsumida: number, pessoasSelecionadas: boolean[]) {
-    let cont = 0;
-    pessoasSelecionadas.forEach((m, i) => {
-      if (m) {
-        cont++;
-        conta.consumidores.push(<Consumidor>{
-          pessoa: conta.pessoas[i],
-          produto: produto,
-          quantidade: 0
-        });
-      }
+    let pessoas: Pessoa[] = pessoasSelecionadas.map((ps, i) => {
+      if (ps) return conta.pessoas[i];
+      else return null;
+    }).filter(p => p != null);
+
+    pessoas.forEach(p => {
+      conta.consumidores.push(<Consumidor>{
+        pessoa: p,
+        produto: produto,
+        quantidade: quantidadeConsumida / pessoas.length
+      });
     });
-    const qntdIndividual = quantidadeConsumida / cont;
-    conta.consumidores.forEach(c => c.quantidade = qntdIndividual);
   }
 
   private addApenasProduto(ps: Array<Produto>, produto: Produto): void {
