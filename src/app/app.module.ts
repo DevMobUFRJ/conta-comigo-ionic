@@ -35,7 +35,8 @@ import { ExpandableComponent } from '../components/expandable/expandable';
     BrowserModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot(),
-    BrMaskerModule
+    BrMaskerModule,
+    
   ],
   bootstrap: [IonicApp],
   entryComponents: [
