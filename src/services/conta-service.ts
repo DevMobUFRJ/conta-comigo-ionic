@@ -39,10 +39,12 @@ export class ContaService {
   public criaListaPessoaComProdutos(conta: Conta): Array<PessoaProduto> {
     let lista: Array<PessoaProduto> = [];
     conta.pessoas.forEach(p => {
-      lista.push(<PessoaProduto>{
+      let pp = <PessoaProduto>{
         pessoa: p,
         produtosConsumidos: conta.consumidores.filter(c => c.pessoa.nome == p.nome)
-      });
+      };
+
+      lista.push(pp);
     });
 
     return lista;
@@ -51,11 +53,17 @@ export class ContaService {
   public criaListaProdutoComPessoas(conta: Conta): Array<ProdutoPessoa> {
     let lista: Array<ProdutoPessoa> = [];
     conta.produtos.forEach(p => {
-      lista.push(<ProdutoPessoa>{
+      let pp = <ProdutoPessoa>{
         produto: p,
-        consumidores: conta.consumidores.filter(c => c.produto.nome == p.nome)
-      });
+        consumidores: conta.consumidores.filter(c => c.produto.nome == p.nome),
+        expanded: false,
+      };
+      pp.qntdTotal = pp.consumidores.map(c => c.quantidade).reduce((ac, cr) => ac+cr);
+      pp.valorTotal = pp.produto.preco * pp.qntdTotal;
+      lista.push(pp);
     });
+
+    console.log(lista)
 
     return lista;
   }
