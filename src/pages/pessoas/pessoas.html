@@ -16,8 +16,8 @@
         {{pessoaProduto.pessoa.nome}}
         <expandable [expandHeight]="itemExpandHeight" [expanded]="pessoaProduto.expanded">
           <p *ngFor="let produtosConsumidos of pessoaProduto.produtosConsumidos">
-            {{produtosConsumidos.quantidade}}x {{produtosConsumidos.produto.nome}}
-            {{produtosConsumidos.produto.preco}}
+            {{produtosConsumidos.produto.nome}} - {{produtosConsumidos.quantidade}} x
+            {{produtosConsumidos.produto.preco}} = R${{produtosConsumidos.produto.preco * produtosConsumidos.quantidade}}
           </p>
         </expandable>
         <button ion-button clear item-end>R${{pessoaProduto.total}}</button>
