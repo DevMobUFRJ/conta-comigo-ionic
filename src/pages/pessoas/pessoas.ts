@@ -4,6 +4,7 @@ import { Conta } from '../../models/conta';
 import { PessoaModalPage } from '../pessoa-modal/pessoa-modal';
 import { ContaService } from '../../services/conta-service';
 import { PessoaProduto } from '../../models/pessoa-produto';
+import { Consumidor } from '../../models/consumidor';
 
 @IonicPage()
 @Component({
@@ -15,12 +16,17 @@ export class PessoasPage {
   public conta: Conta;
   public pessoasProdutos: Array<PessoaProduto>
 
-  constructor(public navCtrl: NavController,
-    public navParams: NavParams,
-    public modalCtrl: ModalController,
-    private _contaService: ContaService,
-    public _events: Events) {
+  public valorGorjeta: number = 10;
+  public gorjetaIs: boolean = false;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private _contaService: ContaService, public _events: Events) {
     this.conta = this.navParams.data;
+
+    this._events.subscribe('update-gorjeta', (valor, is) => {
+      this.valorGorjeta = valor;
+      this.gorjetaIs = is;
+    });
+
     this._events.subscribe('update-conta', (conta) => {
       this.conta = conta
       this.initExpandableList();
@@ -53,6 +59,31 @@ export class PessoasPage {
 
   public removePessoa(pessoaProduto) {
     //TODO remoção do banco de pessoaProduto recebida
+  }
+
+  public calcValorTotal(pessoaProduto: PessoaProduto): string {
+    return `R$ ${(pessoaProduto.total * (this.gorjetaIs ? 1 + (this.valorGorjeta / 100) : 1)).toFixed(2)}`
+  }
+
+  public calcValorPorProduto(produtoConsumido: Consumidor): string {
+    return `${produtoConsumido.produto.nome} - ${produtoConsumido.quantidade} x
+    ${(produtoConsumido.produto.preco * (this.gorjetaIs ? 1 + (this.valorGorjeta / 100) : 1)).toFixed(2)} = R$
+    ${(produtoConsumido.produto.preco * produtoConsumido.quantidade * (this.gorjetaIs ? 1 + (this.valorGorjeta / 100) : 1)).toFixed(2)}`;
+  }
+
+  public maisGorjeta() {
+    this.valorGorjeta++;
+    this._events.publish('update-gorjeta', this.valorGorjeta, this.gorjetaIs);
+  }
+
+  public switchGorjeta() {
+    this.gorjetaIs = !this.gorjetaIs;
+    this._events.publish('update-gorjeta', this.valorGorjeta, this.gorjetaIs);
+  }
+
+  public menosGorjeta() {
+    this.valorGorjeta--;
+    this._events.publish('update-gorjeta', this.valorGorjeta, this.gorjetaIs);
   }
 
 }
