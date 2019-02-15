@@ -11,16 +11,36 @@
 
   <ion-list>
     <button (click)="expandItem(produtoPessoa)" ion-item *ngFor="let produtoPessoa of produtosPessoas">
-      {{produtoPessoa.produto.nome}}
-      
+      {{produtoPessoa.produto.nome}} x {{produtoPessoa.qntdTotal}}
+
       <expandable [expandHeight]="itemExpandHeight" [expanded]="produtoPessoa.expanded">
         <p *ngFor="let consumidor of produtoPessoa.consumidores">
-        {{consumidor.pessoa.nome}} x {{consumidor.quantidade}} - R${{consumidor.total}}
+            {{calcValorPorProduto(consumidor)}}
         </p>
       </expandable>
-      <button ion-button clear item-end>R${{produtoPessoa.total}}</button>
+
+      <button ion-button clear item-end>{{calcValorTotal(produtoPessoa)}}</button>
     </button>
   </ion-list>
+
+  <!-- BOTAO GORJETA -->
+  <ion-fab left bottom>
+    <button ion-fab [ngStyle]="{'background-color': this.gorjetaIs ? '#5E0F7F' : '#f4f4f4', 'color': this.gorjetaIs ? 'white' : 'black'}">
+      {{valorGorjeta}}%
+    </button>
+    <ion-fab-list side="top">
+      <button ion-fab (click)="menosGorjeta()">
+        <ion-icon name="remove"></ion-icon>
+      </button>
+      <button ion-fab [ngStyle]="{'background-color': this.gorjetaIs ? '#5E0F7F' : '#f4f4f4', 'color': this.gorjetaIs ? 'white' : 'black'}"
+        (click)="switchGorjeta()">
+        {{valorGorjeta}}%
+      </button>
+      <button ion-fab (click)="maisGorjeta()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
 
   <!-- BOTÃO ADICIONAR -->
   <ion-fab right bottom>

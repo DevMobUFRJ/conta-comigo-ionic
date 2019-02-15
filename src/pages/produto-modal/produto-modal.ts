@@ -18,6 +18,7 @@ export class ProdutoModalPage {
   public quantidadeConsumida: number;
   public qntdsDiferentes: boolean = false;
   public marcadas: Array<boolean> = [];
+  public precoString: string;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -41,6 +42,7 @@ export class ProdutoModalPage {
   }
 
   public add(): void {
+    this.produto.preco = Number(this.precoString.replace(/\./g, '').replace(',', '.'))
     this._produtoService.add(this.produto, this.conta, this.quantidadeConsumida, this.marcadas);
     this.dismiss();
   }

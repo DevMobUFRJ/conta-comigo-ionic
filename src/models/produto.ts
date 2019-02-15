@@ -1,4 +1,4 @@
 export interface Produto {
     nome: string
-    preco: string
+    preco: number
 }

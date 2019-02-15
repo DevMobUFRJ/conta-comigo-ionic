@@ -6,5 +6,4 @@ export interface PessoaProduto {
     produtosConsumidos: Array<Consumidor>
     total: number;
     expanded: boolean;
-    itemExpandHeight: number;
 }

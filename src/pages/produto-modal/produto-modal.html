@@ -21,7 +21,7 @@
     </ion-item>
 
     <ion-item margin-top>
-      <ion-input no-margin placeholder="Preço" [(ngModel)]="produto.preco" [brmasker]="{money: true}"></ion-input>
+      <ion-input no-margin placeholder="Preço" [(ngModel)]="precoString" [brmasker]="{money: true}"></ion-input>
     </ion-item>
 
     <!-- <ion-grid>
@@ -53,7 +53,7 @@
 
     <div *ngFor="let pessoa of conta.pessoas; let i = index" [attr.data-index]="i">
       <ion-item>
-        <ion-checkbox checked="marcadas[i]" [(ngModel)]="marcadas[i]"></ion-checkbox>
+        <ion-checkbox [checked]="marcadas[i]" [(ngModel)]="marcadas[i]"></ion-checkbox>
         <ion-label>{{pessoa.nome}}</ion-label>
         <!-- <div *ngIf="!mostraQntdDiferente(i)">
           <ion-label>Qnt?</ion-label>
