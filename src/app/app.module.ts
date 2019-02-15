@@ -19,6 +19,7 @@ import { ProdutoService } from '../services/produto-service';
 
 import { BrMaskerModule } from 'brmasker-ionic-3';
 import { ExpandableComponent } from '../components/expandable/expandable';
+import { HideFabDirective } from '../directives/hide-fab/hide-fab';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ExpandableComponent } from '../components/expandable/expandable';
     ProdutosPage,
     PessoaModalPage,
     ProdutoModalPage,
-    ExpandableComponent
+    ExpandableComponent,
+    HideFabDirective
   ],
   imports: [
     BrowserModule,
