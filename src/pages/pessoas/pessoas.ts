@@ -4,6 +4,7 @@ import { Conta } from '../../models/conta';
 import { PessoaModalPage } from '../pessoa-modal/pessoa-modal';
 import { ContaService } from '../../services/conta-service';
 import { PessoaProduto } from '../../models/pessoa-produto';
+import { Consumidor } from '../../models/consumidor';
 
 @IonicPage()
 @Component({
@@ -15,13 +16,17 @@ export class PessoasPage {
   public conta: Conta;
   public pessoasProdutos: Array<PessoaProduto>
 
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams, 
-              public modalCtrl: ModalController, 
-              private _contaService: ContaService,
-              public _events: Events) 
-  { 
+  public valorGorjeta: number = 10;
+  public gorjetaIs: boolean = false;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public modalCtrl: ModalController, private _contaService: ContaService, public _events: Events) {
     this.conta = this.navParams.data;
+
+    this._events.subscribe('update-gorjeta', (valor, is) => {
+      this.valorGorjeta = valor;
+      this.gorjetaIs = is;
+    });
+
     this._events.subscribe('update-conta', (conta) => {
       this.conta = conta
       this.initExpandableList();
@@ -29,38 +34,56 @@ export class PessoasPage {
   }
 
   ionViewDidLoad() {
+    this.initExpandableList();
   }
 
   ionViewDidEnter() {
-    this.initExpandableList();
   }
 
   private initExpandableList() {
     this.pessoasProdutos = this._contaService.criaListaPessoaComProdutos(this.conta);
-    this.pessoasProdutos.forEach(element => {
-      element.expanded = false;
-      element.total = 0 as number;
-      element.produtosConsumidos.forEach(consumidor => {
-        element.total = element.total + Number(consumidor.produto.preco.replace(/\./g, '').replace(',', '.'));
-      });
-    });
   }
 
   public openPessoaModal() {
     let modal = this.modalCtrl.create(PessoaModalPage);
     modal.onDidDismiss(pessoa => {
-      if(pessoa != null) {
+      if (pessoa != null) {
       }
     });
     modal.present();
   }
 
-  public expandItem(item){
+  public expandItem(item) {
     item.expanded = !item.expanded;
   }
 
-  public removePessoa(pessoaProduto){
+  public removePessoa(pessoaProduto) {
     //TODO remoção do banco de pessoaProduto recebida
+  }
+
+  public calcValorTotal(pessoaProduto: PessoaProduto): string {
+    return `R$ ${(pessoaProduto.total * (this.gorjetaIs ? 1 + (this.valorGorjeta / 100) : 1)).toFixed(2)}`
+  }
+
+  public calcValorPorProduto(produtoConsumido: Consumidor): string {
+    return `${produtoConsumido.produto.nome} - ${produtoConsumido.quantidade} x
+    ${(produtoConsumido.produto.preco * (this.gorjetaIs ? 1 + (this.valorGorjeta / 100) : 1)).toFixed(2)} = R$
+    ${(produtoConsumido.produto.preco * produtoConsumido.quantidade * (this.gorjetaIs ? 1 + (this.valorGorjeta / 100) : 1)).toFixed(2)}`;
+  }
+
+  public maisGorjeta() {
+    this.valorGorjeta++;
+    this._events.publish('update-gorjeta', this.valorGorjeta, this.gorjetaIs);
+  }
+
+  public switchGorjeta() {
+    this.gorjetaIs = !this.gorjetaIs;
+    this._events.publish('update-gorjeta', this.valorGorjeta, this.gorjetaIs);
+  }
+
+  public menosGorjeta() {
+    this.valorGorjeta--;
+    this._events.publish('update-gorjeta', this.valorGorjeta, this.gorjetaIs);
   }
 
 }

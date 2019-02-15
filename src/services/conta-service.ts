@@ -35,14 +35,19 @@ export class ContaService {
     return this.storage.get('conta');
   }
 
-  // ex: para listar cada pessoa e dentro dela, cada produto consumido por ela
   public criaListaPessoaComProdutos(conta: Conta): Array<PessoaProduto> {
     let lista: Array<PessoaProduto> = [];
     conta.pessoas.forEach(p => {
-      lista.push(<PessoaProduto>{
+      let pp = <PessoaProduto>{
         pessoa: p,
-        produtosConsumidos: conta.consumidores.filter(c => c.pessoa.nome == p.nome)
-      });
+        produtosConsumidos: conta.consumidores.filter(c => c.pessoa.nome == p.nome),
+        expanded: false,
+        total: 0
+      };
+      if(pp.produtosConsumidos.length != 0) {
+        pp.total = pp.produtosConsumidos.map(pc => pc.produto.preco*pc.quantidade).reduce((ac, cur) => ac+cur);
+      }
+      lista.push(pp);
     });
 
     return lista;
@@ -51,10 +56,14 @@ export class ContaService {
   public criaListaProdutoComPessoas(conta: Conta): Array<ProdutoPessoa> {
     let lista: Array<ProdutoPessoa> = [];
     conta.produtos.forEach(p => {
-      lista.push(<ProdutoPessoa>{
+      let pp = <ProdutoPessoa>{
         produto: p,
-        consumidores: conta.consumidores.filter(c => c.produto.nome == p.nome)
-      });
+        consumidores: conta.consumidores.filter(c => c.produto.nome == p.nome),
+        expanded: false,
+      };
+      pp.qntdTotal = pp.consumidores.map(c => c.quantidade).reduce((ac, cr) => ac+cr);
+      pp.valorTotal = pp.produto.preco * pp.qntdTotal;
+      lista.push(pp);
     });
 
     return lista;
